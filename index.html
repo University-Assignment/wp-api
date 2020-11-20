@@ -18,6 +18,7 @@
             <main>
                 <div class="row center">
                     <form id="form">
+                        <input type="hidden" name="currentPage" value="1" />
                         <input
                             type="text"
                             name="keyword"
@@ -27,9 +28,13 @@
                         <button type="submit">검색</button>
                     </form>
                     <ul id="address-list"></ul>
+                    <div class="paginate" id="pageApi"></div>
                 </div>
             </main>
-            <footer>&copy; 2018037010 <a href="https://github.com/dungbik">윤정환</a></footer>
+            <footer>
+                &copy; 2018037010
+                <a href="https://github.com/dungbik">윤정환</a>
+            </footer>
         </div>
         <script>
             const API_URL =
@@ -40,20 +45,29 @@
 
             form.addEventListener("submit", async e => {
                 e.preventDefault();
+                form.currentPage.value = 1;
+                await changeInfo();
+            });
+            
+            async function changeInfo() {
                 const keyword = encodeURIComponent(form.keyword.value);
                 try {
-                    const response = await search(keyword);
+                    const response = await search(
+                        keyword,
+                        form.currentPage.value
+                    );
                     const txt = await response.text();
                     const results = JSON.parse(
                         txt.replace(/^\(/, "").replace(/\)$/, "")
                     ).results;
+                    pageMake(results);
                     display(results);
-                    form.reset();
                 } catch (e) {
                     console.error(e);
                 }
-            });
-            function search(keyword, currentPage = 1, countPerPage = 10) {
+            }
+            
+            function search(keyword, currentPage, countPerPage = 5) {
                 const data = {
                     confmKey: API_KEY,
                     keyword,
@@ -85,6 +99,62 @@
                     li.innerHTML = `${item.zipNo}) ${item.roadAddr}`;
                     addressList.appendChild(li);
                 });
+            }
+
+            async function goPage(pageNum) {
+                form.currentPage.value = pageNum;
+                await changeInfo();
+            }
+
+            function pageMake(jsonStr) {
+                var total = jsonStr.common.totalCount;
+                var pageNum = form.currentPage.value;
+                var paggingStr = "<nav>";
+                paggingStr += "<ul>";
+                if (total < 1) {
+                } else {
+                    var PAGEBLOCK = 5;
+                    var pageSize = 5;
+                    var totalPages = Math.floor((total - 1) / pageSize) + 1;
+                    var firstPage =
+                        Math.floor((pageNum - 1) / PAGEBLOCK) * PAGEBLOCK + 1;
+                    if (firstPage <= 0) firstPage = 1;
+                    var lastPage = firstPage - 1 + PAGEBLOCK;
+                    if (lastPage > totalPages) lastPage = totalPages;
+                    var nextPage = lastPage + 1;
+                    var prePage = firstPage - 5;
+                    if (firstPage > PAGEBLOCK) {
+                        paggingStr +=
+                            "<a href='javascript:goPage(" +
+                            prePage +
+                            ");'>◁</a>  ";
+                    }
+                    for (i = firstPage; i <= lastPage; i++) {
+                        if (pageNum == i)
+                            paggingStr +=
+                                "<a href='javascript:goPage(" +
+                                i +
+                                ");'>" +
+                                i +
+                                "</a>";
+                        else
+                            paggingStr +=
+                                "<a href='javascript:goPage(" +
+                                i +
+                                ");'>" +
+                                i +
+                                "</a>";
+                    }
+                    if (lastPage < totalPages) {
+                        paggingStr +=
+                            "<a href='javascript:goPage(" +
+                            nextPage +
+                            ");'>▷</a>";
+                    }
+                    paggingStr += "</ul>";
+                    paggingStr += "</nav>";
+                    document.querySelector("#pageApi").innerHTML = paggingStr;
+                }
             }
         </script>
     </body>
