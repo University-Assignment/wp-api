@@ -2,20 +2,35 @@
 <html lang="ko">
     <head>
         <meta charset="UTF-8" />
-        <title>주소 API 실습</title>
+        <link rel="stylesheet" href="style.css" />
+        <title>API Practice</title>
     </head>
     <body>
-        <h1>주소 검색</h1>
-        <form id="form">
-            <input
-                type="text"
-                name="keyword"
-                id="keyword"
-                placeholder="검색어 입력"
-            />
-            <button type="submit">검색</button>
-        </form>
-        <ul id="address-list"></ul>
+        <div class="grid-container">
+            <header class="row">
+                <div>
+                    <a class="brand" href="index.html">API Practice</a>
+                </div>
+                <div>
+                    <a href="index.html">로그인</a>
+                </div>
+            </header>
+            <main>
+                <div class="row center">
+                    <form id="form">
+                        <input
+                            type="text"
+                            name="keyword"
+                            id="keyword"
+                            placeholder="검색어 입력"
+                        />
+                        <button type="submit">검색</button>
+                    </form>
+                    <ul id="address-list"></ul>
+                </div>
+            </main>
+            <footer>&copy; 2018037010 <a href="https://github.com/dungbik">윤정환</a></footer>
+        </div>
         <script>
             const API_URL =
                 "http://www.juso.go.kr/addrlink/addrLinkApiJsonp.do";
