@@ -9,7 +9,6 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     background-color: #f4f4f4;
 }
-/* Layout */
 .grid-container {
     display: grid;
     grid-template-areas:
@@ -35,11 +34,8 @@ footer {
     background-color: #203040;
     color: #ffffff;
 }
-a {
-    text-decoration: none;
-    color: #ffffff;
-}
 header a {
+    color: #ffffff;
     padding: 2rem;
 }
 a.brand {
@@ -56,4 +52,68 @@ a.brand {
 .row.center {
     justify-content: center;
     flex-direction: column;
+}
+a {
+    color: #203040;
+    text-decoration: none;
+    background-color: transparent;
+}
+form input {
+    border-radius: 1rem;
+    font-size: 3rem;
+}
+form .input-field {
+    width: 100%;
+    position: relative;
+}
+#keyword {
+    min-height: 1rem;
+    width: 100%;
+    border: 0;
+    background: #fff;
+    display: block;
+    padding: 10px 40px 10px 32px;
+    font-size: 2rem;
+    color: #666;
+    border-radius: 34px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+}
+#keyword:hover,
+#keyword:focus,
+#keyword:focus-within,
+#keyword:active {
+    background: #fff;
+    border: 1px solid;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-transition: background-color 9999s ease-out;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+.input-field .btn-search {
+    width: 70px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    position: absolute;
+    right: -8rem;
+    top: 0;
+    height: 100%;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    align-items: center;
 }
