@@ -117,3 +117,26 @@ input:-webkit-autofill:active {
     justify-content: center;
     align-items: center;
 }
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #203040;
+    border: 1px solid #203040;
+    border-collapse: collapse;
+    table-layout: fixed;
+    word-break: break-all;
+}
+.table-dark {
+    color: #fff;
+    background-color: #203040;
+}
+th,
+td {
+    border: 1px solid #203040;
+    padding: 0.5rem;
+    padding-left: 1.5rem;
+}
+ul {
+    padding-top: 3rem;
+    padding-left: 0;
+}
