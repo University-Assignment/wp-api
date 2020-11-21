@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="style.css" />
+        <title>API Practice</title>
+    </head>
+    <body>
+        <div class="grid-container">
+            <header class="row">
+                <div>
+                    <a class="brand" href="index.html">API Practice</a>
+                </div>
+                <div>
+                    <a href="index.html">로그인</a>
+                </div>
+            </header>
+            <main>
+                <div class="row center">
+                    <div id="map" style="width:600px;height:500px;"></div>
+                </div>
+            </main>
+            <footer>
+                &copy; 2018037010
+                <a href="https://github.com/dungbik">윤정환</a>
+            </footer>
+        </div>
+        <script
+            type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=922bcc89296e9d985081f3495d3d33ab&libraries=services"
+        ></script>
+        <script>
+            function getParam(sname) {
+                var params = location.search.substr(
+                    location.search.indexOf("?") + 1
+                );
+                var sval = "";
+                params = params.split("&");
+                for (var i = 0; i < params.length; i++) {
+                    temp = params[i].split("=");
+                    if ([temp[0]] == sname) {
+                        sval = temp[1];
+                    }
+                }
+                return sval;
+            }
+        </script>
+        <script>
+            const bdNm = decodeURIComponent(getParam("bdNm"));
+            const roadAddr = decodeURIComponent(getParam("roadAddr"));
+            const jibunAddr = decodeURIComponent(getParam("jibunAddr"));
+            const zipNo = decodeURIComponent(getParam("zipNo"));
+            var mapCustomOverlay = null;
+            var mapContainer = document.getElementById("map"),
+                mapOption = {
+                    center: new kakao.maps.LatLng(33.450701, 126.570667),
+                    level: 3
+                };
+
+            var map = new kakao.maps.Map(mapContainer, mapOption);
+            var geocoder = new kakao.maps.services.Geocoder();
+            geocoder.addressSearch(
+                roadAddr,
+                function(result, status) {
+                    if (status === kakao.maps.services.Status.OK) {
+                        var coords = new kakao.maps.LatLng(
+                            result[0].y,
+                            result[0].x
+                        );
+
+                        var content =
+                            '<div class="wrap">' +
+                            '    <div class="info">' +
+                            '        <div class="title">' +
+                            `            ${bdNm}` +
+                            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+                            "        </div>" +
+                            '        <div class="body">' +
+                            '            <div class="desc">' +
+                            `                <div class="ellipsis">${roadAddr}</div>` +
+                            `                <div class="jibun ellipsis"> ${jibunAddr} (우) ${zipNo}</div>` +
+                            `                <div><a href="https://map.kakao.com/link/search/${encodeURIComponent(roadAddr)}" target="_blank" class="link">카카오맵 이동</a></div>` +
+                            "            </div>" +
+                            "        </div>" +
+                            "    </div>" +
+                            "</div>";
+                        
+                        var marker = new kakao.maps.Marker({
+                            map: map, 
+                            position: coords
+                        });
+
+                        mapCustomOverlay = new kakao.maps.CustomOverlay({
+                            position: marker.getPosition(),
+                            content: content,
+                            xAnchor: 0.5,
+                            yAnchor: 0.5
+                        });
+
+                        mapCustomOverlay.setMap(map);
+
+                        map.setCenter(coords);
+                        kakao.maps.event.addListener(marker, "click", function() {
+                            mapCustomOverlay.setMap(map);
+                        });
+                    }
+                }
+            );
+            
+            function closeOverlay() {
+                mapCustomOverlay.setMap(null);
+            }
+        </script>
+    </body>
+</html>
