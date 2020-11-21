@@ -53,9 +53,9 @@ a.brand {
     align-items: center;
 }
 .row.center {
-    margin-top: 2rem;
     justify-content: center;
     flex-direction: column;
+    height: 100%;
 }
 a {
     color: #203040;
@@ -69,6 +69,8 @@ form input {
 form .input-field {
     width: 100%;
     position: relative;
+    transition-duration: 3s;
+    transition-timing-function: ease;
 }
 #keyword {
     min-height: 1rem;
@@ -268,4 +270,7 @@ ul {
 }
 .info .link {
     color: #5085bb;
+}
+#map {
+    margin:auto;
 }

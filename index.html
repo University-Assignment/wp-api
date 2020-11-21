@@ -71,6 +71,9 @@
             async function changeInfo() {
                 const keyword = encodeURIComponent(form.keyword.value);
                 try {
+                    if (!checkSearchedWord(form.keyword)) {
+                        return;
+                    }
                     const response = await search(
                         keyword,
                         form.currentPage.value
@@ -112,14 +115,30 @@
             }
 
             function display(results) {
-                let htmlStr = "<table frame='void' width='1000px' class='table'>";
+                let htmlStr =
+                    "<table frame='void' width='1000px' class='table'>";
                 htmlStr +=
                     "<colgroup><col width='220px'/><col width='350px'/><col width='350px'/><col width='80px'/></colgroup>";
                 htmlStr +=
                     "<thead class='table-dark'><tr><th>도로명주소</th><th>지번주소</th><th>도로명주소(영문)</th><th>우편번호</th></tr></thead><tbody>";
                 results.juso.forEach(item => {
                     htmlStr += "<tr>";
-                    htmlStr += `<td height=70px> <a href='map.html?bdNm=${encodeURIComponent(item.bdNm)}&roadAddr=${encodeURIComponent(item.roadAddr)}&jibunAddr=${encodeURIComponent(item.siNm + " " + item.sggNm + " " + item.emdNm + " " + item.lnbrMnnm)}&zipNo=${encodeURIComponent(item.zipNo)}'>` + item.roadAddr + "</td>";
+                    htmlStr +=
+                        `<td height=70px> <a href='map.html?bdNm=${encodeURIComponent(
+                            item.bdNm
+                        )}&roadAddr=${encodeURIComponent(
+                            item.roadAddr
+                        )}&jibunAddr=${encodeURIComponent(
+                            item.siNm +
+                                " " +
+                                item.sggNm +
+                                " " +
+                                item.emdNm +
+                                " " +
+                                item.lnbrMnnm
+                        )}&zipNo=${encodeURIComponent(item.zipNo)}'>` +
+                        item.roadAddr +
+                        "</td>";
                     htmlStr += "<td height=70px>" + item.jibunAddr + "</td>";
                     htmlStr += "<td height=70px>" + item.engAddr + "</td>";
                     htmlStr += "<td height=70px>" + item.zipNo + "</td>";
@@ -183,6 +202,47 @@
                     paggingStr += "</nav>";
                     document.querySelector("#pageApi").innerHTML = paggingStr;
                 }
+            }
+            function checkSearchedWord(obj) {
+                if (obj.value.length > 0) {
+                    var expText = /[%=><]/;
+                    if (expText.test(obj.value) == true) {
+                        alert("특수문자를 입력 할수 없습니다.");
+                        obj.value = obj.value.split(expText).join("");
+                        return false;
+                    }
+
+                    var sqlArray = new Array(
+                        "OR",
+                        "SELECT",
+                        "INSERT",
+                        "DELETE",
+                        "UPDATE",
+                        "CREATE",
+                        "DROP",
+                        "EXEC",
+                        "UNION",
+                        "FETCH",
+                        "DECLARE",
+                        "TRUNCATE"
+                    );
+
+                    var regex;
+                    for (var i = 0; i < sqlArray.length; i++) {
+                        regex = new RegExp(sqlArray[i], "gi");
+
+                        if (regex.test(obj.value)) {
+                            alert(
+                                '"' +
+                                    sqlArray[i] +
+                                    '"와(과) 같은 특정문자로 검색할 수 없습니다.'
+                            );
+                            obj.value = obj.value.replace(regex, "");
+                            return false;
+                        }
+                    }
+                }
+                return true;
             }
         </script>
     </body>
