@@ -34,6 +34,9 @@ footer {
     background-color: #203040;
     color: #ffffff;
 }
+footer a {
+    color: #ffffff;
+}
 header a {
     color: #ffffff;
     padding: 2rem;
@@ -50,6 +53,7 @@ a.brand {
     align-items: center;
 }
 .row.center {
+    margin-top: 8rem;
     justify-content: center;
     flex-direction: column;
 }
@@ -72,10 +76,10 @@ form .input-field {
     border: 0;
     background: #fff;
     display: block;
-    padding: 10px 40px 10px 32px;
+    padding: 10px 10px 10px 10px;
     font-size: 2rem;
     color: #666;
-    border-radius: 34px;
+    border-radius: 40px;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
@@ -105,22 +109,19 @@ input:-webkit-autofill:active {
     -ms-flex-align: center;
     align-items: center;
     position: absolute;
-    right: -8rem;
+    right: -5rem;
     top: 0;
     height: 100%;
     background: transparent;
     border: 0;
     padding: 0;
     cursor: pointer;
-    display: flex;
-    -ms-flex-pack: center;
-    justify-content: center;
-    align-items: center;
 }
 .table {
-    width: 100%;
-    margin-bottom: 1rem;
+    width: 80%;
+    margin: auto;
     color: #203040;
+    background-color: #ffffff;
     border: 1px solid #203040;
     border-collapse: collapse;
     table-layout: fixed;
@@ -134,9 +135,51 @@ th,
 td {
     border: 1px solid #203040;
     padding: 0.5rem;
-    padding-left: 1.5rem;
+    text-align: center;
 }
 ul {
-    padding-top: 3rem;
     padding-left: 0;
+    padding-top: 1rem;
+    margin-bottom: 0;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+.pagination {
+    display: -ms-flexbox;
+    display: flex;
+    list-style: none;
+    border-radius: 0.3rem;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #203040;
+    border-color: #203040;
+}
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.7rem 1rem;
+    line-height: 1.25;
+    color: #203040;
+    background-color: #fff;
+    border: 1px solid #203040;
+}
+.page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+.page-item:last-child .page-link {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
 }

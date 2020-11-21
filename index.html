@@ -114,7 +114,7 @@
             function display(results) {
                 let htmlStr = "<table width='1000px' border='1' class='table'>";
                 htmlStr +=
-                    "<colgroup><col width='220px'/><col width='365px'/><col width='365px'/><col width='50px'/></colgroup>";
+                    "<colgroup><col width='220px'/><col width='350px'/><col width='350px'/><col width='80px'/></colgroup>";
                 htmlStr +=
                     "<thead class='table-dark'><tr><th>도로명주소</th><th>지번주소</th><th>도로명주소(영문)</th><th>우편번호</th></tr></thead><tbody>";
                 results.juso.forEach(item => {
@@ -138,7 +138,7 @@
                 var total = jsonStr.common.totalCount;
                 var pageNum = form.currentPage.value;
                 var paggingStr = "<nav>";
-                paggingStr += "<ul>";
+                paggingStr += "<ul class='pagination'>";
                 if (total < 1) {
                 } else {
                     var PAGEBLOCK = 5;
@@ -153,31 +153,31 @@
                     var prePage = firstPage - 5;
                     if (firstPage > PAGEBLOCK) {
                         paggingStr +=
-                            "<a href='javascript:goPage(" +
+                            "<li class='page-item'><a class='page-link' href='javascript:goPage(" +
                             prePage +
-                            ");'>◁</a>  ";
+                            ");'>◁</a></li>";
                     }
                     for (i = firstPage; i <= lastPage; i++) {
                         if (pageNum == i)
                             paggingStr +=
-                                "<a href='javascript:goPage(" +
+                                "<li class='page-item active' aria-current='page'><a class='page-link' href='javascript:goPage(" +
                                 i +
                                 ");'>" +
                                 i +
-                                "</a>";
+                                "<span class='sr-only'>(current)</span></a></li>";
                         else
                             paggingStr +=
-                                "<a href='javascript:goPage(" +
+                                "<li class='page-item'><a class='page-link' href='javascript:goPage(" +
                                 i +
                                 ");'>" +
                                 i +
-                                "</a>";
+                                "</a></li>";
                     }
                     if (lastPage < totalPages) {
                         paggingStr +=
-                            "<a href='javascript:goPage(" +
+                            "<li class='page-item'><a class='page-link' href='javascript:goPage(" +
                             nextPage +
-                            ");'>▷</a>";
+                            ");'>▷</a></li>";
                     }
                     paggingStr += "</ul>";
                     paggingStr += "</nav>";
