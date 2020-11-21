@@ -119,10 +119,10 @@
                     "<thead class='table-dark'><tr><th>도로명주소</th><th>지번주소</th><th>도로명주소(영문)</th><th>우편번호</th></tr></thead><tbody>";
                 results.juso.forEach(item => {
                     htmlStr += "<tr>";
-                    htmlStr += `<td height=50px> <a href='/map.html?bdNm=${encodeURIComponent(item.bdNm)}&roadAddr=${encodeURIComponent(item.roadAddr)}&jibunAddr=${encodeURIComponent(item.siNm + " " + item.sggNm + " " + item.emdNm + " " + item.lnbrMnnm)}&zipNo=${encodeURIComponent(item.zipNo)}'>` + item.roadAddr + "</td>";
-                    htmlStr += "<td height=50px>" + item.jibunAddr + "</td>";
-                    htmlStr += "<td height=50px>" + item.engAddr + "</td>";
-                    htmlStr += "<td height=50px>" + item.zipNo + "</td>";
+                    htmlStr += `<td height=70px> <a href='map.html?bdNm=${encodeURIComponent(item.bdNm)}&roadAddr=${encodeURIComponent(item.roadAddr)}&jibunAddr=${encodeURIComponent(item.siNm + " " + item.sggNm + " " + item.emdNm + " " + item.lnbrMnnm)}&zipNo=${encodeURIComponent(item.zipNo)}'>` + item.roadAddr + "</td>";
+                    htmlStr += "<td height=70px>" + item.jibunAddr + "</td>";
+                    htmlStr += "<td height=70px>" + item.engAddr + "</td>";
+                    htmlStr += "<td height=70px>" + item.zipNo + "</td>";
                     htmlStr += "</tr>";
                 });
                 htmlStr += "</tbody></table>";
