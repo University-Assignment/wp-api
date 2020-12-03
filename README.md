@@ -51,6 +51,52 @@
 
 - grid-container를 통해 header, main, footer를 감싸주었고, grid를 사용해 전체적인 레이아웃을 구성하였다.
 
+## 검색어 필터링
+
+```js
+function checkSearchedWord(obj) {
+  if (obj.value.length > 0) {
+    var expText = /[%=><]/;
+    if (expText.test(obj.value) == true) {
+      alert("특수문자를 입력 할수 없습니다.");
+      obj.value = obj.value.split(expText).join("");
+      return false;
+    }
+
+    var sqlArray = new Array(
+      "OR",
+      "SELECT",
+      "INSERT",
+      "DELETE",
+      "UPDATE",
+      "CREATE",
+      "DROP",
+      "EXEC",
+      "UNION",
+      "FETCH",
+      "DECLARE",
+      "TRUNCATE"
+    );
+
+    var regex;
+    for (var i = 0; i < sqlArray.length; i++) {
+      regex = new RegExp(sqlArray[i], "gi");
+
+      if (regex.test(obj.value)) {
+        alert(
+          '"' + sqlArray[i] + '"와(과) 같은 특정문자로 검색할 수 없습니다.'
+        );
+        obj.value = obj.value.replace(regex, "");
+        return false;
+      }
+    }
+  }
+  return true;
+}
+```
+
+- 문제를 일으킬 수 있는 특수 문자 및 지시어들을 필터링 해주었다.
+
 ## 페이지네이션
 
 ![](img/페이지네이션.png)
@@ -168,6 +214,10 @@ var content =
 ![](img/카카오맵.png)
 
 - 카카오맵 이동 클릭시 검색한 주소를 카카오맵에서 찾아 보여줌
+
+![](img/카카오맵2.png)
+
+- 편의 시설 마커의 상단을 클릭시 카카오맵에서 해당 정보를 보여줌
 
 <br>
 
