@@ -143,6 +143,17 @@ function getParam(sname) {
 
 ![](img/카카오맵.png)
 
+```html
+<div>
+  <a
+    href="https://map.kakao.com/link/search/${encodeURIComponent(roadAddr)}"
+    target="_blank"
+    class="link"
+    >카카오맵 이동</a
+  >
+</div>
+```
+
 - 카카오맵 이동 클릭시 검색한 주소를 카카오맵에서 찾아 보여줌
 
 <br>
