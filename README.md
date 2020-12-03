@@ -1,6 +1,6 @@
 # HTML, CSS, JavaScript
 
-![](img/home.gif)
+![](img/test.gif)
 
 <br>
 
@@ -111,6 +111,8 @@ function pageMake(jsonStr) {
 ## 지도
 
 ![](img/지도.png)
+
+- 검색한 위치 근처에 존재하는 편의 시설을 검색해 볼 수 있다.
 
 ```html
 <a
