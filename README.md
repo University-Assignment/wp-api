@@ -136,23 +136,34 @@ function getParam(sname) {
 ```
 
 - getParam 함수로 get방식으로 받은 파라미터를 name으로 value를 읽어온다
-- 그 후 카카오 지도 API에 도로명을 검색하여 좌표를 찾아 위치를 표시하고 받아온 정보를 커스텀 마커로 표현해준다.
+
+```js
+var content =
+  '<div class="wrap">' +
+  '    <div class="info">' +
+  '        <div class="title">' +
+  `            ${bdNm}` +
+  '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+  "        </div>" +
+  '        <div class="body">' +
+  '            <div class="desc">' +
+  `                <div class="ellipsis">${roadAddr}</div>` +
+  `                <div class="jibun ellipsis"> ${jibunAddr} (우) ${zipNo}</div>` +
+  `                <div><a href="https://map.kakao.com/link/search/${encodeURIComponent(
+    roadAddr
+  )}" target="_blank" class="link">카카오맵 이동</a></div>` +
+  "            </div>" +
+  "        </div>" +
+  "    </div>" +
+  "</div>";
+```
+
+- 그 후 카카오 지도 API에 도로명을 검색하여 좌표를 찾아 위치를 표시하고 getParam 함수로 읽어온 정보를 커스텀 마커로 표현해준다.
 - 커스텀 마커는 건물 이름, 도로명, 지번 주소, 우편 번호, 카카오맵 이동을 보여준다.
 
 ## 카카오맵
 
 ![](img/카카오맵.png)
-
-```html
-<div>
-  <a
-    href="https://map.kakao.com/link/search/${encodeURIComponent(roadAddr)}"
-    target="_blank"
-    class="link"
-    >카카오맵 이동</a
-  >
-</div>
-```
 
 - 카카오맵 이동 클릭시 검색한 주소를 카카오맵에서 찾아 보여줌
 
