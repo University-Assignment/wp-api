@@ -53,6 +53,8 @@
 
 ## 페이지네이션
 
+![](img/페이지네이션.png)
+
 ```js
 function pageMake(jsonStr) {
   var total = jsonStr.common.totalCount;
@@ -108,6 +110,8 @@ function pageMake(jsonStr) {
 
 ## 지도
 
+![](img/지도.png)
+
 ```html
 <a
   href='map.html?bdNm=${encodeURIComponent(item.bdNm)}&roadAddr=${encodeURIComponent(item.roadAddr)}&jibunAddr=${encodeURIComponent(item.siNm + " " + item.sggNm + " " + item.emdNm + " " + item.lnbrMnnm)}&zipNo=${encodeURIComponent(item.zipNo)}'
@@ -133,6 +137,13 @@ function getParam(sname) {
 
 - getParam 함수로 get방식으로 받은 파라미터를 name으로 value를 읽어온다
 - 그 후 카카오 지도 API에 도로명을 검색하여 좌표를 찾아 위치를 표시하고 받아온 정보를 커스텀 마커로 표현해준다.
+- 커스텀 마커는 건물 이름, 도로명, 지번 주소, 우편 번호, 카카오맵 이동을 보여준다.
+
+## 카카오맵
+
+![](img/카카오맵.png)
+
+- 카카오맵 이동 클릭시 검색한 주소를 카카오맵에서 찾아 보여줌
 
 <br>
 
